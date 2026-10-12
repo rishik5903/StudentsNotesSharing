@@ -1,51 +1,39 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:8080/api';
+const API_BASE_URL =
+  `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080'}/api`;
 
 const api = axios.create({
   baseURL: API_BASE_URL,
   timeout: 30000,
 });
 
-// -------------------------------------------------------
-// Notes API
-// -------------------------------------------------------
+// Fetch all notes or filter/search
+export const fetchNotes = (params = {}) =>
+  api.get('/notes', { params });
 
-/** Fetch all notes, or filter/search by query params */
-export const fetchNotes = (params = {}) => {
-  return api.get('/notes', { params });
-};
+// Fetch a single note
+export const fetchNoteById = (id) =>
+  api.get(`/notes/${id}`);
 
-/** Fetch a single note by id */
-export const fetchNoteById = (id) => {
-  return api.get(`/notes/${id}`);
-};
-
-/** Upload a new note (multipart/form-data) */
-export const uploadNote = (formData, onUploadProgress) => {
-  return api.post('/notes', formData, {
-    headers: { 'Content-Type': 'multipart/form-data' },
+// Upload a note
+export const uploadNote = (formData, onUploadProgress) =>
+  api.post('/notes', formData, {
     onUploadProgress,
   });
-};
 
-/** Delete a note by id */
-export const deleteNote = (id) => {
-  return api.delete(`/notes/${id}`);
-};
+// Delete a note
+export const deleteNote = (id) =>
+  api.delete(`/notes/${id}`);
 
-/** Get all distinct subject names */
-export const fetchSubjects = () => {
-  return api.get('/notes/subjects');
-};
+// Get subjects
+export const fetchSubjects = () =>
+  api.get('/notes/subjects');
 
-/** Get dashboard stats */
-export const fetchStats = () => {
-  return api.get('/notes/stats');
-};
+// Get dashboard statistics
+export const fetchStats = () =>
+  api.get('/notes/stats');
 
-/** Return the download URL for a note (used as href) */
-export const getDownloadUrl = (id) => {
-  return `${API_BASE_URL}/notes/${id}/download`;
-};
-
+// Download a note
+export const getDownloadUrl = (id) =>
+  `${API_BASE_URL}/notes/${id}/download`;

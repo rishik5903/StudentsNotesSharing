@@ -1,0 +1,38 @@
+# ============================================================
+# CampusNotes — .gitignore
+# ============================================================
+
+# ---- Java / Maven ----
+backend/target/
+backend/.mvn/wrapper/maven-wrapper.jar
+*.class
+*.jar
+*.war
+*.ear
+*.log
+
+# ---- Uploaded PDF files (store in uploads/ at runtime, NOT in git) ----
+backend/uploads/
+uploads/
+
+# ---- Node / npm ----
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# ---- Environment / credentials ----
+.env
+.env.local
+*.env
+
+# ---- IDE ----
+.idea/
+*.iml
+.vscode/settings.json
+*.DS_Store
+__MACOSX/
+
+# ---- OS ----
+.DS_Store
+Thumbs.db
+
